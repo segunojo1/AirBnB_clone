@@ -1,11 +1,13 @@
 #!/usr/bin/python3
 """Base model for airbnb"""
-import uuid
-import datetime
+
+from uuid import uuid4
+from datetime import datetime
 
 
 class BaseModel:
     """base model"""
+
     def __init__(self):
         """initialization"""
         self.id = str(uuid.uuid4())
