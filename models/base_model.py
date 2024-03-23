@@ -14,11 +14,10 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key == "__class__":
                     continue
-                else:
-                    for ["created_at", "updated_at"] in key:
-                        value = datetime.fromisoformat(value)
-                        continue
-                    setattr(self, key, value)
+                if key in ["created_at", "updated_at"]:
+                    setattr(self, key, datetime.fromisoformat(value))
+                    continue
+                setattr(self, key, value)
         else:
             self.id = str(uuid4())
             self.created_at = datetime.now()
