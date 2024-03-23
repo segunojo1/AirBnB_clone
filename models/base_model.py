@@ -1,21 +1,21 @@
 #!/usr/bin/python3
-"""Base model for airbnb"""
+"""Import modules datetime, uuid4 and storage"""
 
 from uuid import uuid4
 from datetime import datetime
 
 
 class BaseModel:
-    """base model"""
+    """A base class for other models in the system"""
 
     def __init__(self):
-        """initialization"""
-        self.id = str(uuid.uuid4())
+        """instance of a new basemodel"""
+        self.id = str(uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
 
     def __str__(self):
-        """str print"""
+        """return a string representation of BaseModel instance"""
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
@@ -23,7 +23,7 @@ class BaseModel:
         self.updated_at = datetime.now()
 
     def to_dict(self):
-        """dictt"""
+        """converts the instnace to a dictionary"""
         new_obj = self.__dict__.copy()
         new_obj['__class__'] = self.__class__.__name__
         new_obj['created_at'] = self.created_at.isoformat()
