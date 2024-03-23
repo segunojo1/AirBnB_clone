@@ -6,16 +6,26 @@ from datetime import datetime
 
 
 class BaseModel:
-    """A base class for other models in the system"""
+    """Base class for  models in the system"""
 
-    def __init__(self):
-        """instance of a new basemodel"""
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+    def __init__(self, *args, **kwargs):
+        """new instantiation of a new basemodel"""
+        if kwargs:
+            for key, value in kwargs.items():
+                if key == "__class__":
+                    continue
+                else:
+                    for ["created_at", "updated_at"] in key:
+                        value = datetime.fromisoformat(value)
+                        continue
+                    setattr(self, key, value)
+        else:
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
 
     def __str__(self):
-        """return a string representation of BaseModel instance"""
+        """returns a string representation of BaseModel instance"""
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
@@ -23,7 +33,7 @@ class BaseModel:
         self.updated_at = datetime.now()
 
     def to_dict(self):
-        """converts the instnace to a dictionary"""
+        """converts the instance to dictionary"""
         new_obj = self.__dict__.copy()
         new_obj['__class__'] = self.__class__.__name__
         new_obj['created_at'] = self.created_at.isoformat()
