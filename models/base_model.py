@@ -22,3 +22,8 @@ class BaseModel:
 
     def to_dict(self):
         """dictt"""
+        new_obj = self.__dict__.copy()
+        new_obj['__class__'] = self.__class__.__name__
+        new_obj['created_at'] = self.created_at.isoformat()
+        new_obj['updated_at'] = self.updated_at.isoformat()
+        return new_obj
