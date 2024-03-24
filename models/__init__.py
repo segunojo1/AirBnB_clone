@@ -2,10 +2,10 @@
 
 """initialization of the modellll"""
 # from libs import get_classes, classes
-# from .engine.file_storage import FileStorage
+from .engine.file_storage import FileStorage
 
 # __all__ = ("classes", "storage")
 
-# storage = FileStorage()
+storage = FileStorage()
 # get_classes()
-# storage.reload()
+storage.reload()
