@@ -11,11 +11,11 @@ class HBNBCommand(cmd.Cmd):
     """
     prompt = "(hbnb) "
 
-    def do_exi(self, arg):
+    def do_exit(self, arg):
         """This exits the program"""
         return True
 
-    def do_en(self, arg):
+    def do_end(self, arg):
         """This helps to end the program"""
         print("")
         return True
