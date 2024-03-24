@@ -1,43 +1,43 @@
-#!/usr/bin/python3
-"""
-Import modules with functions related to
-JSON file handling files and classes
-"""
+#1/usr/bin/python3
+"""contains a file storage model for storing classes"""
 import json
 from os import path
 
-from libs import classes
-
 
 class FileStorage:
-    """A class for handling storage operations using JSON files"""
+    """serializes instances to a JSON file and deserializes JSON file to instances"""
     __file_path = "file.json"
     __objects = {}
 
     def all(self):
-        """Retrieve all objects stored in the file storage"""
+        """all returns the dictionary (object)"""
         return self.__objects
 
     def new(self, obj):
-        """Adds a new object to the file storage"""
-        self.__objects.update({f"{obj.__class__.__name__}.{obj.id}": obj})
+        """
+        new sets in __objects the obj with key <obj class name>.id
+        """
+        key = f"{obj.__class__.__name__}.{obj.id}"
+        self.obj[key] = obj
 
     def save(self):
-        """saves the objects in the file storage to the JSON file"""
-        with open(self.__file_path, "w") as js:
-            ser = {
-                key: value.to_dict()
-                for key, value in self.__objects.items()
-            }
-            js.write(json.dumps(ser))
+        """
+        save: serializes __objects to the JSON file (path: __file_path)
+        """
+        objects = {}
+        for key, obj in self.__objects.items():
+            objects[key] = obj.to_dict()
+
+        with open(self.__file_path, "w") as f:
+            json.dump(objects, f)
 
     def reload(self):
-        """Reloads objects from the JSON file into the file storage"""
-        if not path.exists(self.__file_path):
-            return
-        with open(self.__file_path) as js:
-            des = json.loads(js.read())
-            self.__objects = {
-                key: classes[key.split(".")[0]](**value)
-                for key, value in des.items()
-            }
+        """
+        reload deserializes the JSON file to __objects (only if the JSON file (__file_path) exists ; otherwise, do nothing. If the file doesn’t exist, no exception should be raised)
+        """
+        if path.exists(self.__file_path):
+            with open(self.__file_path, "r") as file:
+                data = json.load(file)
+                for key, value in data.items():
+                    class_name, obj_id = key.split('.')
+                    self.__objects[key] = globals()[class_name](**value)
