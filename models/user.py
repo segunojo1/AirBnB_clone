@@ -1,6 +1,5 @@
-#!/usr/bin/python3
-"""the user model created now"""
 from models.base_model import BaseModel
+"""the user model created now"""
 
 
 class User(BaseModel):
