@@ -1,6 +1,5 @@
-#!/usr/bin/python3
-"""the STATE model created now"""
 from models.base_model import BaseModel
+"""the STATE model created now"""
 
 
 class State(BaseModel):
