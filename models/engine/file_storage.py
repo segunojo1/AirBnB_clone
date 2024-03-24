@@ -17,8 +17,7 @@ class FileStorage:
         """
         new sets in __objects the obj with key <obj class name>.id
         """
-        key = f"{obj.__class__.__name__}.{obj.id}"
-        self.obj[key] = obj
+        self.__objects.update({f"{obj.__class__.__name__}.{obj.id}": obj})
 
     def save(self):
         """
