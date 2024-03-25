@@ -2,21 +2,21 @@ classes = {}
 
 
 def get_classes():
-    from models.base_model import BaseModel
-    from models.user import User
     from models.city import City
-    from models.place import Place
-    from models.amenity import Amenity
-    from models.state import State
+    from models.user import User
+    from models.base_model import BaseModel
     from models.review import Review
+    from models.place import Place
+    from models.state import State
+    from models.amenity import Amenity
 
     global classes
     classes.update({
-        "BaseModel": BaseModel,
-        "User": User,
         "City": City,
+        "User": User,
+        "BaseModel": BaseModel,
+        "Review": Review,
         "Place": Place,
-        "Amenity": Amenity,
         "State": State,
-        "Review": Review
+        "Amenity": Amenity
     })
