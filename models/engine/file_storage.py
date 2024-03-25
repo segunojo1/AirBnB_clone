@@ -39,9 +39,12 @@ class FileStorage:
         if not path.exists(FileStorage.__file_path):
             return
         with open(self.__file_path, "r", encoding="utf-8") as rl:
-            des = json.load(rl)
-            for key, value in des.items():
-                class_name.obj_id = key.split('.')
-                cls = eval(class_name)
-                inst = cls(**values)
-                FileStorage.__objects[key] = inst
+            try:
+                des = json.load(rl)
+                for key, value in des.items():
+                    class_name.obj_id = key.split('.')
+                    cls = eval(class_name)
+                    inst = cls(**values)
+                    FileStorage.__objects[key] = inst
+            except Exception:
+                pass
