@@ -3,6 +3,7 @@
 this is the main console for our application
 """
 import cmd
+from .models.basemodel import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
@@ -23,6 +24,12 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """This does nothing when empty line is entered"""
         pass
+
+    def do_create(self):
+        """This helps in the running the create command"""
+        base = BaseModel()
+        base.save()
+        print(base.id)
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
