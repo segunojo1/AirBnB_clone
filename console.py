@@ -3,6 +3,7 @@
 this is the main console for our application
 """
 import cmd
+from models import classes, storage
 from .models.basemodel import BaseModel
 
 
@@ -27,16 +28,12 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """This helps in the running the create command"""
-        if not arg:
-            print("** class name missing **")
+        print(model)
+        if not self.checker(model, ["n", 'ec']):
             return
-
-        try:
-            new_instance = eval(arg)()
-            new_instance.save()
-            print(new_instance.id)
-        except NameError:
-            print("** class doesn't exist **")
+        ins = classes[model]()
+        ins.save()
+        print(ins.id)
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
