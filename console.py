@@ -25,9 +25,9 @@ class HBNBCommand(cmd.Cmd):
         """This does nothing when empty line is entered"""
         pass
 
-    def do_create(self):
+    def do_create(self, model):
         """This helps in the running the create command"""
-        base = BaseModel()
+        base = model()
         base.save()
         print(base.id)
 
