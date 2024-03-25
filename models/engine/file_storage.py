@@ -36,14 +36,11 @@ class FileStorage:
         """
         reload deserializes the JSON file to __objects (only if the JSON file (__file_path) exists ; otherwise, do nothing. If the file doesn’t exist, no exception should be raised)
         """
-        if os.path.isFile(FileStorage.__file_path):
-            with open(FileStorage.__file_path, "r", encoding="utf-8") as rl:
-                try:
-                    des = json.load(rl)
-                    for key, value in des.items():
-                        class_name.obj_id = key.split('.')
-                        cls = eval(class_name)
-                        inst = cls(**values)
-                        FileStorage.__objects[key] = inst
-                except Exception:
-                    pass
+        if not path.exists(self.__file_path):
+            return
+        with open(self.__file_path) as js:
+            des = json.loads(js.read())
+            self.__objects = {
+                key: classes[key.split(".")[0]](**value)
+                for key, value in des.items()
+            }
