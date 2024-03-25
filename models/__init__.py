@@ -4,8 +4,8 @@
 from libs import get_classes, classes
 from .engine.file_storage import FileStorage
 
-__all__ = ("classes", "storage")
+# __all__ = ("classes", "storage")
 
 storage = FileStorage()
-get_classes()
+# get_classes()
 storage.reload()
