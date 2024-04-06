@@ -1,0 +1,9 @@
+.filters{
+    align-content: center;
+    background-color: white;
+    width: 100%;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    height: 70px;
+    text-align: right;
+}
