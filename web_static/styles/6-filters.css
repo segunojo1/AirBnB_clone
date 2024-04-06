@@ -1,0 +1,11 @@
+.popover{
+    background-color: #FAFAFA;
+    width: 100%;
+    border: 1px solid #DDDDDD;
+    list-style: none;
+    display: none;
+}
+
+.locations:hover .popover, .amenities:hover .popover{
+    display: block;
+}
